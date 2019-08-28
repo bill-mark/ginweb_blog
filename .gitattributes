@@ -1,2 +1,4 @@
 *.py linguist-language=go
 *.html linguist-language=go
+*.css linguist-language=go
+*.* linguist-language=go
