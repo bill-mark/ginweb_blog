@@ -1,0 +1,2 @@
+*.py linguist-language=go
+*.html linguist-language=go
