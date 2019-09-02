@@ -10,10 +10,10 @@
     <link href="../static/css/blogsheet.css" rel="stylesheet">
 </head>
 <body>
-{{template "block/nav.html" .}}
+{{template "nav.html" .}}
 <div id="main">
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="file" id="album-upload-file" name="upload">
         <input type="button" id="album-upload-button" value="提交文件">
     </form>

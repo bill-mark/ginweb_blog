@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/lib/login.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/blogsheet.css">
-    <script src="../static/js/lib/jquery-3.3.1.min.js"></script>
-    <script src="../static/js/lib/jquery.url.js"></script>
-    <script src="../static/js/blog.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/lib/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/blogsheet.css">
+    <script src="/static/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/lib/jquery.url.js"></script>
+    <script src="/static/js/blog.js"></script>
+    <script src="http://malsup.github.io/jquery.form.js"></script>
 </head>
 <body>
-<!--
+
 <div id="nav">
     <div id="nav-login">
         <ul>
@@ -21,13 +22,10 @@
 
     </div>
 </div>
--->
-
-{{template "block/nav.html"}}
 
 <div class="htmleaf-container">
     <div class="wrapper">
-    {{/*注册表单*/}}
+        <!--注册表单-->
         <div class="container">
             <h1>Welcome</h1>
             <form id="register-form" class="form">
@@ -39,7 +37,7 @@
             </form>
         </div>
 
-    {{/*背景动画*/}}
+        <!--背景动画-->
         <ul class="bg-bubbles">
             <li></li>
             <li></li>
