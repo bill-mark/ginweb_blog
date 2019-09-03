@@ -16,7 +16,6 @@ import (
 func RegisterPost(c *gin.Context){
     fmt.Println("RegisterPost")
 
-
 	data, _ := ioutil.ReadAll(c.Request.Body)
 	var cc map[string]string
 	json.Unmarshal(data,&cc)

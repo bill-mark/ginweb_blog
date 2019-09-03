@@ -10,6 +10,11 @@ func InitRouter()*gin.Engine{
 
    //注册
    router.POST("/register",controllers.RegisterPost)
+   //登录
+   router.POST("/login",controllers.LoginPost)
+   //更新密码
+   router.POST("/update_password",controllers.UpdatePassword)
+
 
    return router
 }
