@@ -3,24 +3,25 @@ package controllers
 import (
 	"blogweb_gin/models"
 	"blogweb_gin/utils"
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"net/http"
 	"time"
 )
 
-func RegisterGet(c *gin.Context){
-	fmt.Println("get  this is get")
-   c.HTML(http.StatusOK,"register.html",gin.H{"title":"注册页"})
-}
 
 //处理注册
 func RegisterPost(c *gin.Context){
     fmt.Println("RegisterPost")
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-	repassword := c.PostForm("repassword")
-	fmt.Println(username,password,repassword)
+
+
+	data, _ := ioutil.ReadAll(c.Request.Body)
+	var cc map[string]string
+	json.Unmarshal(data,&cc)
+	username := cc["username"]
+	password := cc["password"]
 
 	id := models.QueryUserWightUsername(username)
 	if id > 0{
