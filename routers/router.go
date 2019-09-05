@@ -2,6 +2,7 @@ package routers
 
 import (
 	"blogweb_gin/controllers"
+	"blogweb_gin/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,12 @@ func InitRouter()*gin.Engine{
    //更新密码
    router.POST("/update_password",controllers.UpdatePassword)
 
+   //school接口
+   taR := router.Group("/school")
+   taR.Use(middleware.JWTAuth())
+   {
+   	taR.GET("/list",controllers.GetList)
+   }
 
    return router
 }
