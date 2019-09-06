@@ -74,3 +74,40 @@ func QuerySchoolWithCon(sql string)([]School,error){
 	}
 	return schoolList,nil
 }
+
+//删除
+func DeletSchoolWithId(ID int)(int64,error){
+	return database.ModifyDB("delete from school where id=?",ID)
+}
+
+//模糊搜索
+func SearchSchoolLikeKey(key string)([]School,error){
+	rows,err := database.QueryDBLike(key)
+	if err != nil {
+		return nil, err
+	}
+	var schoolList []School
+	for rows.Next(){
+		var school School
+		_ = rows.Scan(&school.Id,&school.Name,&school.Area)
+		schoolList = append(schoolList,school)
+	}
+	return schoolList,nil
+}
+
+//地区查询
+func SearchSchoolArea(key string)([]School,error){
+	sql := fmt.Sprintf("select * from school where area='%s' ",key)
+	fmt.Println(sql)
+	rows,err := database.QueryDB(sql)
+	if err != nil {
+		return nil, err
+	}
+	var schoolList []School
+	for rows.Next(){
+		var school School
+		_ = rows.Scan(&school.Id,&school.Name,&school.Area)
+		schoolList = append(schoolList,school)
+	}
+	return schoolList,nil
+}

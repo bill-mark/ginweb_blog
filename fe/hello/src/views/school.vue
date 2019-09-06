@@ -1,19 +1,29 @@
 <template>
 <div>
 	<div class="addschool">
-		<input type="newname" v-model="newname" placeholder="学校名">
-		<input type="newarea" v-model="newarea" placeholder="地区" >
-	
+		<input  v-model="newname" placeholder="学校名">
+		<input  v-model="newarea" placeholder="地区" >
 		<button type="submit" @click="submit">增加</button>
 	</div>
 
+      <div>
+            <input type="txt" v-model="likekey" >
+            <button @click="like_search">搜索</button>
+      </div>
+      <div>
+            <input type="txt" v-model="area" >
+            <button @click="area_search">地区筛选</button>
+      </div>
+
 	<div class="top">
-		<div>学校名</div>
-		<div>地区</div>
+		<div style="width: 100px;">学校名</div>
+		<div style="width: 50px;text-align: left;">地区</div>
+            <div>操作</div>
 	</div>
 	<div class="school" v-for="item in list">
-		<div>{{item.name}}</div>
-		<div>{{item.area}}</div>
+		<div style="width: 100px;">{{item.name}}</div>
+		<div style="width: 50px;">{{item.area}}</div>
+            <div @click="delet(item.id)" style="cursor: pointer;">删除</div>
 	</div>
 
 	 <div class="pages"  style="margin-top:30px;margin-left:50px;padding-bottom:40px;display:flex;justify-content:center;user-select:none;">
@@ -38,8 +48,10 @@ export default{
 			newname:'',
 			newarea:'',
 			page:1,
-			total:4,
+			total:5,
                   list_total:0,//总共多少条
+                  likekey:'',
+                  area:'',
 		}
 	},
 	mounted(){
@@ -47,6 +59,58 @@ export default{
        this.get_list()
 	},
 	methods:{
+       like_search(){
+           this.$http.get('/school/likesearch',{
+               params:{
+                   key:this.likekey
+               }                                     
+           })
+           .then((res)=>{        
+               if(res.data.code == 0){
+                  this.list = res.data.data
+               }
+               if(res.data.code == -100){
+                  this.$router.push({path:'/login'})
+               }
+           })
+           .catch( (error)=>{
+                  
+           })
+       },
+       area_search(){
+           this.$http.get('/school/areasearch',{
+               params:{
+                   key:this.area
+               }                                     
+           })
+           .then((res)=>{        
+               if(res.data.code == 0){
+                  this.list = res.data.data
+               }
+               if(res.data.code == -100){
+                  this.$router.push({path:'/login'})
+               }
+           })
+           .catch( (error)=>{
+                  
+           })
+       },
+       delet(id){
+           this.$http.post('/school/delet',{
+                     id:id                                   
+                  })
+                  .then((res)=>{        
+                      if(res.data.code == 0){
+                        this.get_list()
+                      }
+                      if(res.data.code == -100){
+                        this.$router.push({path:'/login'})
+                      }
+                  })
+                  .catch( (error)=>{
+                         
+                  })
+       },
        handleSizeChange(val){  //修改每页展示条数
            this.total = val;
            this.get_list();
@@ -88,8 +152,8 @@ export default{
       	.catch( (error)=>{
       	       
       	})
-      },
-      get_list(){
+       },
+       get_list(){
        	  	this.$http.get('/school/get',{
        	  	    params:{
                           page:this.page,
@@ -109,7 +173,7 @@ export default{
        	  	       
        	  	})
        },
-	}
+      }
 }
 </script>
 <style lang="scss" scoped>
@@ -125,6 +189,8 @@ export default{
 .school{
 	margin-top: 5px;
 	display: flex;
+      height: 25px;
+      line-height: 25px;
 	width: 500px;
 	justify-content: space-around;
 	margin:0 auto;

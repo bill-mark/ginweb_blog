@@ -58,6 +58,11 @@ func QueryDB(sql string)(*sql.Rows,error){
 	return db.Query(sql)
 }
 
+//模糊查询
+func QueryDBLike(key string)(*sql.Rows,error){
+	return db.Query("SELECT * FROM school where name like CONCAT('%',?,'%') or area like CONCAT('%',?,'%');",key,key)
+}
+
 func CreateTableWithSchool(){
 	sql := `create table if not exists school(
             id int(4) primary key auto_increment not null,

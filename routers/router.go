@@ -26,6 +26,12 @@ func InitRouter()*gin.Engine{
    	taR.POST("/add",controllers.AddSchoolPost)
    	//分页查询学校
    	taR.GET("/get",controllers.GetSchoolListFenye)
+   	//删除学校
+   	taR.POST("/delet",controllers.DeletSchoolWithId)
+   	//模糊搜索
+   	taR.GET("/likesearch",controllers.LikeSearchSchool)
+   	//地区搜索
+   	taR.GET("/areasearch",controllers.SchoolArea)
    }
 
    return router
