@@ -61,11 +61,8 @@ func QuerySchoolWithPage(page,num int)([]School,error){
 
 func QuerySchoolWithCon(sql string)([]School,error){
 	sql = "select id,name,area from school " + sql
-	fmt.Println(sql)
 	rows,err  := database.QueryDB(sql)
 	if err != nil {
-		fmt.Println("querydb wrong")
-		fmt.Println(err)
 		return nil, err
 	}
 

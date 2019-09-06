@@ -16,7 +16,17 @@
 		<div>{{item.area}}</div>
 	</div>
 
-	
+	 <div class="pages"  style="margin-top:30px;margin-left:50px;padding-bottom:40px;display:flex;justify-content:center;user-select:none;">
+            <el-pagination 
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="page"
+              :page-sizes="[5, 10]"
+              :page-size=total
+              layout="total, sizes, prev, pager, next,slot,jumper"
+              :total="list_total">
+            </el-pagination>
+       </div>
 </div>
 </template>
 
@@ -27,16 +37,24 @@ export default{
 			list:[],
 			newname:'',
 			newarea:'',
-
 			page:1,
 			total:4,
+                  list_total:0,//总共多少条
 		}
 	},
 	mounted(){
-       this.get_alllist()
+       //this.get_alllist()
        this.get_list()
 	},
 	methods:{
+       handleSizeChange(val){  //修改每页展示条数
+           this.total = val;
+           this.get_list();
+       },
+       handleCurrentChange(val){ //分页回调
+           this.page = val;
+           this.get_list();
+       },
        get_alllist(){
        	  	this.$http.get('/school/list',{
        	  	    params:{
@@ -56,7 +74,7 @@ export default{
        	  	})
        },
        submit(){
-      	this.$http.post('/school/add',{	     
+            this.$http.post('/school/add',{	     
       	       name:this.newname,
       	       area:this.newarea,  	     
       	})
@@ -74,13 +92,14 @@ export default{
       get_list(){
        	  	this.$http.get('/school/get',{
        	  	    params:{
-                  page:this.page,
-                  total:this.total
+                          page:this.page,
+                          total:this.total
        	  	    }	         	  	      	     
        	  	})
        	  	.then((res)=>{        
        	  	    if(res.data.code == 0){
-       	  	    	
+       	  	    	this.list_total = res.data.allnumber
+                        this.list = res.data.data
        	  	    }
        	  	    if(res.data.code == -100){
        	  	    	this.$router.push({path:'/login'})
