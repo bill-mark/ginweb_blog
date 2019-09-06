@@ -18,6 +18,7 @@ func InitMysql(){
 		// db,_ = sqlx.Open("mysql","root:FF558234ttpk@tcp(127.0.0.1:3306)/blogweb_gin?charset=utf8")
 		db, _ = sql.Open("mysql", "root:FF558234ttpk@tcp(127.0.0.1:3306)/blogweb_gin")
 		CreateTableWithUser()
+		CreateTableWithSchool()
 	}
 }
 
@@ -32,6 +33,7 @@ func CreateTableWithUser(){
 	ModifyDB(sql)
 }
 
+//操作数据库
 func ModifyDB(sql string,args ...interface{})(int64,error){
 	result,err := db.Exec(sql,args...)
 	if err != nil{
@@ -46,6 +48,21 @@ func ModifyDB(sql string,args ...interface{})(int64,error){
 	return count,nil
 }
 
+//精确查询
 func QueryRowDB(sql string) *sql.Row{
 	return db.QueryRow(sql)
+}
+
+//查询
+func QueryDB(sql string)(*sql.Rows,error){
+	return db.Query(sql)
+}
+
+func CreateTableWithSchool(){
+	sql := `create table if not exists school(
+            id int(4) primary key auto_increment not null,
+            name  varchar(64),
+            area  varchar(64)
+           );`
+	ModifyDB(sql)
 }

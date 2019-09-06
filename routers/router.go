@@ -20,7 +20,12 @@ func InitRouter()*gin.Engine{
    taR := router.Group("/school")
    taR.Use(middleware.JWTAuth())
    {
-   	taR.GET("/list",controllers.GetList)
+   	//获得学校总列表
+   	taR.GET("/list",controllers.GetSchoolList)
+   	//新增学校
+   	taR.POST("/add",controllers.AddSchoolPost)
+   	//分页查询学校
+   	taR.GET("/get",controllers.GetSchoolListFenye)
    }
 
    return router
