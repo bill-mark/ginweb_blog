@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	myjwt "blogweb_gin/middleware"
-	"blogweb_gin/models"
+	myjwt "blog_model/middleware"
+	"blog_model/models"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"

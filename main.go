@@ -1,8 +1,8 @@
 package main
 
 import (
-	"blogweb_gin/database"
-	"blogweb_gin/routers"
+	"blog_model/database"
+	"blog_model/routers"
 )
 
 func main(){

@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"blogweb_gin/models"
-	"blogweb_gin/utils"
+	"blog_model/models"
+	"blog_model/utils"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"

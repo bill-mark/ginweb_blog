@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"blogweb_gin/controllers"
-	"blogweb_gin/middleware"
+	"blog_model/controllers"
+	"blog_model/middleware"
 	"github.com/gin-gonic/gin"
 )
 
