@@ -27,3 +27,11 @@ golang gin
   在database/mysql下
   修改数据库密码为本地密码
   启动项目即可
+
+go mod创建项目
+1.在项目文件夹里初始化项目
+go mod init xxx
+
+2.安装插件
+例子
+go get -u github.com/gogf/gf
